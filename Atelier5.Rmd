@@ -134,6 +134,26 @@ Commentaire:
   
 ```{r}
 # Utiliser pour repondre la question 6.3
+# On va choisir 10 quantiles
+x_maille <- seq(from=0,to=0.9,by=0.1)
+#length(x_maille)
+#length(imcenfant$IMC)
+set.seed(123)
+A <- quantile(IMC.standard,x_maille)
+B <- quantile(rnorm(length(imcenfant$IMC)),x_maille)
+erreur <- sum((A-B)^2)/length(x_maille)
+erreur
+```
+  Pour commparer on utilise la variable $A$ qui contient $10$ quantiles entre le $0$ et le $0.9$ de probabilité de la variable \texttt{IMC} standarisé et la variable $B$ qui contient les memes valueurs pour un distribution normal. Alors on a
+$$
+A = (A_0,\ldots,A_9) \text{ et } B = (B_0,\ldots,B_9)
+$$
+où $A_i= \texttt{quantile}(\texttt{IMC},0.1*i)$ et $B_i= \texttt{quantile}(\texttt{normal},0.1*i)$ avec $i=0,1,\ldots,9.$
+Alors on calcule l'erreur parmi la formule:
+$$
+\frac{1}{n}\,\sum_{i=1}^n (A_i-B_i)^2
+$$
+On a un erreur autour de `r erreur`
 ```
 Commentaire:
 
